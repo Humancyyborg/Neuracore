@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Drooid</title>
-
+    <title>Neuracore: Neural Stem Cell Research</title>
     <style>
         #main {
             margin-left: 10px;
@@ -25,7 +24,6 @@
             margin: 0 auto;
         }
 
-
         p,
         li {
             overflow-wrap: break-word;
@@ -38,6 +36,45 @@
             margin-top: 0.5em;
             margin-bottom: 0.5em;
         }
+
+        .centered {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: #000;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -45,13 +82,11 @@
     <div id="main">
         <h2>Neuracore &mdash; Advancing stem cell therapies to treat epilepsy.</h2>
 
-        <p><a href="https://twitter.com/CaelinHq"><b>Neuracore</b></a> is a research lab investigating the use of neural 
-            stem cells to treat epilepsy. We develop animal models of epilepsy to test transplanting stem cells into the brain. 
-            Our goals are to suppress seizures, repair damaged brain regions, and understand how stem 
-            cells integrate into epileptic neural circuits. 
-        
+        <p><a href="https://twitter.com/CaelinHq"><b>Neuracore</b></a> is a research lab investigating the use of neural
+            stem cells to treat epilepsy. We develop animal models of epilepsy to test transplanting stem cells into the brain.
+            Our goals are to suppress seizures, repair damaged brain regions, and understand how stem
+            cells integrate into epileptic neural circuits.
         </p>
-
 
         <ul>
             <li>We Develop machine learning models for automated analysis of stem cell imaging data (morphology, migration, differentiation)</li>
@@ -59,39 +94,174 @@
             <li>We Integrate imaging, genomic, and clinical data using neural networks to study stem cell-epilepsy interactions</li>
         </ul>
 
-
-        <!-- <h3>Prototypes</h3>
+        <h3>Prototype</h3>
 
         <div align="center">
             <p><i>Signals for improved future seizure predictions</i></p>
-            <a href="https://youtu.be/VAAzmV4Egi0">
+            <a href="https://app.uniswap.org/send">
                 <img src="assets/neurademo.gif" alt="bugdemo.gif" width="100%">
             </a>
-        </div> -->
+        </div>
 
+        <div class="animation-container">
+            <canvas id="canvas"></canvas>
+        </div>
 
+        <h3>Presale</h3>
+
+        <div align="center">
+            <p><i>NueracoreDAO Token</i></p>
+            <a href="https://app.uniswap.org/send">
+                <img src="assets/neurabuy.png" alt="bugdemo.gif" width="100%">
+            </a>
+        </div>
+
+        <div class="centered">
+            <h3> BASE ETH Wallet Address: <b>0xb39261122a6c41A9694D137b610E22811acE1B03</b></h3>
+            <a href="https://app.uniswap.org/send" class="button">Buy NeuracoreDAO Token</a>
+        </div>
 
         <h4>About</h4>
 
         <p><a href="https://twitter.com/CaelinHq">Neuracore</a> is a company founded by <a
                 href="https://twitter.com/HumanCyyborg">Daniel KALU</a>  with a mission to cure epilepsy.
-                
-            </p>
+        </p>
 
         <p>We are currently seeking to hire Engineers and Researchers that share our vision and would like to help
-            build the next generation of tools to help people suffering from epilepsy. We are in the early stages of building, 
+            build the next generation of tools to help people suffering from epilepsy. We are in the early stages of building,
             and plan on sharing more information soon! If you are interested in joining, please get in touch dankalu.work@gmail.com </p>
 
-            <p>
-                You can follow us on Twitter at
-                <a href="https://twitter.com/CaelinHq" class="twitter-link">Neuracore</a>
-            </p>
+        <p>
+            You can follow us on Twitter at
+            <a href="https://twitter.com/CaelinHq" class="twitter-link">Neuracore</a>
+        </p>
 
         <h4>Partnership inquiries</h4>
 
         <p>For any business-related topics, including support, please contact us at
             dankalu.work@gmail.com</p>
     </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+
+        const particles = [];
+        const particleCount = 300;
+        const maxParticles = 450; // Cap max particles
+        const connectionDistance = 150;
+        let hue = 180;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.hue = hue + Math.random() * 60 - 30;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                // Slight size pulsation
+                this.size = this.size + Math.sin(Date.now() * 0.01) * 0.1;
+            }
+
+            draw() {
+                ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `hsla(${particles[i].hue}, 100%, 50%, ${1 - distance / connectionDistance})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            hue += 0.5;
+            requestAnimationFrame(animateParticles);
+        }
+
+        createParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+            for (let particle of particles) {
+                particle.x = Math.random() * canvas.width;
+                particle.y = Math.random() * canvas.height;
+            }
+        });
+
+        // Throttle function to limit the rate of event handling
+        function throttle(func, limit) {
+            let lastFunc;
+            let lastRan;
+            return function () {
+                const context = this;
+                const args = arguments;
+                if (!lastRan) {
+                    func.apply(context, args);
+                    lastRan = Date.now();
+                } else {
+                    clearTimeout(lastFunc);
+                    lastFunc = setTimeout(function () {
+                        if ((Date.now() - lastRan) >= limit) {
+                            func.apply(context, args);
+                            lastRan = Date.now();
+                        }
+                    }, limit - (Date.now() - lastRan));
+                }
+            };
+        }
+
+        canvas.addEventListener('mousemove', throttle((event) => {
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Particle());
+                //particles[particles.length - 1].x = event.offset
+                particles[particles.length - 1].x = event.offsetX;
+                particles[particles.length - 1].y = event.offsetY;
+               if (particles.length > maxParticles) particles.shift();
+           }
+       }, 100));
+   </script>
 </body>
 
 </html>
