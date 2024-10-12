@@ -13,7 +13,7 @@
             padding: 0;
         }
 
-        /* Body styling for centering content */
+        /* Body styling for a dark theme */
         body {
             display: flex;
             flex-direction: column;
@@ -21,10 +21,10 @@
             justify-content: center;
             width: 100%;
             min-height: 100vh;
+            background-color: #1c1c1c; /* Dark background */
             line-height: 1.2;
             font-size: 16px;
-            margin: 0;
-            padding: 0;
+            color: #f1f1f1; /* Light text color */
         }
 
         /* Main content container */
@@ -32,7 +32,55 @@
             max-width: 650px;
             width: 100%;
             margin: 40px 10px;
-            padding: 0 10px; /* Add padding to the sides */
+            padding: 20px;
+            background-color: #2c2c2c; /* Slightly lighter background for main content */
+            border-radius: 10px;
+            position: relative; /* Positioning for the alien rectangles */
+            z-index: 1; /* Stack content above the rectangles */
+        }
+
+        /* Alien-like rectangle corners */
+        .corner-rectangle {
+            position: absolute;
+            background-color: #0f0; /* Green color */
+            border-radius: 15px; /* Rounded corners */
+            z-index: 0; /* Behind the main content */
+        }
+
+        /* Top left corner rectangle */
+        .top-left {
+            top: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            transform: rotate(15deg);
+        }
+
+        /* Top right corner rectangle */
+        .top-right {
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            transform: rotate(-15deg);
+        }
+
+        /* Bottom left corner rectangle */
+        .bottom-left {
+            bottom: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            transform: rotate(15deg);
+        }
+
+        /* Bottom right corner rectangle */
+        .bottom-right {
+            bottom: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            transform: rotate(-15deg);
         }
 
         /* Paragraph and list item styling */
@@ -55,6 +103,16 @@
         .centered {
             text-align: center;
             margin: 20px 0;
+        }
+
+        /* Link styling */
+        a {
+            color: #0f0; /* Green color for links */
+            text-decoration: none; /* Remove underline */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
         }
 
         /* Button styling */
@@ -103,10 +161,16 @@
 </head>
 
 <body>
+    <div class="corner-rectangle top-left"></div>
+    <div class="corner-rectangle top-right"></div>
+    <div class="corner-rectangle bottom-left"></div>
+    <div class="corner-rectangle bottom-right"></div>
+    
+
     <div id="main">
         <h2>Cortex &mdash; Advancing stem cell therapies to treat epilepsy.</h2>
 
-        <p><a href="https://x.com/cortexhq_ " target="_blank"><b>Cortex</b></a> is a research lab investigating the use of neural
+        <p><a href="https://x.com/cortexhq_" target="_blank"><b>Cortex</b></a> is a research lab investigating the use of neural
             stem cells to treat epilepsy. We develop animal models of epilepsy to test transplanting stem cells into the brain.
             Our goals are to suppress seizures, repair damaged brain regions, and understand how stem
             cells integrate into epileptic neural circuits.
@@ -134,12 +198,6 @@
             </a>
         </div>
 
-        <!-- <div align="center">
-            <p><i>We use AI to predict when a seizure might strike</i></p>
-            <a href="https://app.uniswap.org/send">
-                <img src="assets/cortexUI.png" alt="Prototype animation" width="100%">
-            </a>
-        </div> -->
         <div align="center">
             <p><i>wearable mock up</i></p>
             <a href="https://app.uniswap.org/send">
@@ -159,37 +217,17 @@
             </a>
         </div>
 
-
-        <!-- <div class="animation-container">
-            <canvas id="canvas"></canvas>
-        </div> -->
-
-        <!-- <h3>Presale</h3>
-
-        <div align="center">
-            <p><i>Coretex DAO Token</i></p>
-            <a href="https://app.uniswap.org/send" target="_blank">
-                <img src="assets/cortex.png" alt="Token presale" width="100%">
-            </a>
-        </div>
-
-        <div class="centered">
-            <h3> ETH Wallet Address: <b>0x08e0Fa852531aee5f8069365003d162EFFc02428</b></h3>
-            <a href="https://app.uniswap.org/send " target="_blank" class="button">Buy CortexDAO Token</a>
-        </div> -->
-
         <h4>About</h4>
 
-        <p><a href="https://x.com/cortexhq_" target="_blank">Cortex</a> is  a mission to cure epilepsy.
+        <p><a href="https://x.com/cortexhq_" target="_blank">Cortex</a> is a mission to cure epilepsy.
         </p>
 
-        <p><a href="https://www.bonfire.com/hop-8/" target="_blank">Get Our  Hacking Epilepsy Out of Existsence T- Shirt </a> to suppoort our mission.
+        <p><a href="https://www.bonfire.com/hop-8/" target="_blank">Get Our Hacking Epilepsy Out of Existence T-Shirt </a> to support our mission.
         </p>
-
 
         <p>We are currently seeking to hire Engineers and Researchers that share our vision and would like to help
             build the next generation of tools to help people suffering from epilepsy. We are in the early stages of building,
-            and plan on sharing more information soon! If you are interested in joining, please get in touch dankalu.work@gmail.com </p>
+            and plan on sharing more information soon! If you are interested in joining, please get in touch at <a href="mailto:dankalu.work@gmail.com">dankalu.work@gmail.com</a> </p>
 
         <p>
             You can follow us on X at
@@ -199,7 +237,7 @@
         <h4>Partnership inquiries</h4>
 
         <p>For any business-related topics, including support, please contact us at
-            dankalu.work@gmail.com</p>
+            <a href="mailto:dankalu.work@gmail.com">dankalu.work@gmail.com</a></p>
     </div>
 
 </body>
