@@ -1,269 +1,404 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cortex: Neural Stem Cell Research</title>
+    <title>Aurevia - Neural Predictive Protection</title>
     <style>
-        /* Resetting default styles for consistency across browsers */
+        :root {
+            --neon-blue: #00f3ff;
+            --deep-space: #0a0a12;
+            --star-dust: #e0e0e8;
+            --electric-purple: #7d40ff;
+        }
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
         }
 
-        /* Body styling for a dark theme */
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 100vh;
-            background-color: #322d2d; /* Dark background */
-            line-height: 1.2;
-            font-size: 16px;
-            color: #f1f1f1; /* Light text color */
+            background-color: var(--deep-space);
+            color: var(--star-dust);
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        /* Main content container */
-        #main {
-            max-width: 650px;
-            width: 100%;
-            margin: 40px 10px;
-            padding: 20px;
-            background-color: #322d2d; /* Slightly lighter background for main content */
-            border-radius: 10px;
-            position: relative; /* Positioning for the alien rectangles */
-            z-index: 1; /* Stack content above the rectangles */
+        .gradient-text {
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        /* Alien-like rectangle corners */
-        .corner-rectangle {
-            position: absolute;
-            background-color: #0f0; /* Green color */
-            border-radius: 15px; /* Rounded corners */
-            z-index: 0; /* Behind the main content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        /* Top left corner rectangle */
-        .top-left {
-            top: -20px;
-            left: -20px;
-            width: 80px;
-            height: 80px;
-            transform: rotate(15deg);
-        }
-
-        /* Top right corner rectangle */
-        .top-right {
-            top: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            transform: rotate(-15deg);
-        }
-
-        /* Bottom left corner rectangle */
-        .bottom-left {
-            bottom: -20px;
-            left: -20px;
-            width: 80px;
-            height: 80px;
-            transform: rotate(15deg);
-        }
-
-        /* Bottom right corner rectangle */
-        .bottom-right {
-            bottom: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            transform: rotate(-15deg);
-        }
-
-        /* Paragraph and list item styling */
-        p,
-        li {
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            hyphens: auto;
-            text-align: justify;
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
-        }
-
-        /* Indent the unordered list */
-        ul {
-            margin-left: 40px;
-        }
-
-        /* Centered text styling */
-        .centered {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        /* Link styling */
-        a {
-            color: #0f0; /* Green color for links */
-            text-decoration: none; /* Remove underline */
-        }
-
-        a:hover {
-            text-decoration: underline; /* Underline on hover */
-        }
-
-        /* Button styling */
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Placeholder for canvas animation, if needed */
-        .animation-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            background-color: #000;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        #canvas {
-            position: absolute;
+        nav {
+            position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
-        /* Media Query for Mobile Devices */
-        @media (max-width: 600px) {
-            #main {
-                padding: 0 20px; /* Increase padding on mobile devices */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid rgba(224, 224, 232, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            max-width: 900px;
+        }
+
+        .scan-line {
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                var(--neon-blue) 50%, 
+                transparent 100%);
+            left: 50%;
+            animation: scan 6s infinite;
+        }
+
+        @keyframes scan {
+            0% { top: -100% }
+            100% { top: 100% }
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border: 1px solid rgba(224, 224, 232, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.05), transparent);
+        }
+
+        .neural-visual {
+            height: 600px;
+            background: radial-gradient(circle, var(--electric-purple) 0%, transparent 70%);
+            opacity: 0.1;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+            color: var(--deep-space);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-top: 2rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 8rem 0;
+        }
+
+        .product-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.1), transparent);
+            border: 1px solid rgba(224, 224, 232, 0.1);
+            padding: 2rem;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(224, 224, 232, 0.1);
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* FAQ Section Styles */
+        .faq-section {
+            padding: 6rem 0;
+            border-top: 1px solid rgba(224, 224, 232, 0.1);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(224, 224, 232, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--star-dust);
+            padding: 1.5rem 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--neon-blue);
+        }
+
+        .faq-question .arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: #a0a0a8;
+            line-height: 1.6;
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust based on content height */
+        }
+
+        .faq-item.active .arrow {
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .product-showcase {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="corner-rectangle top-left"></div>
-    <div class="corner-rectangle top-right"></div>
-    <div class="corner-rectangle bottom-left"></div>
-    <div class="corner-rectangle bottom-right"></div>
-    
-
-    <div id="main">
-        <h2>Cortex &mdash; Advancing stem cell therapies to treat epilepsy.</h2>
-
-        <p><a href="https://x.com/cortexhq_" target="_blank"><b>Cortex</b></a> is a research lab investigating the use of neural
-            stem cells to treat epilepsy. We develop animal models of epilepsy to test transplanting stem cells into the brain.
-            Our goals are to suppress seizures, repair damaged brain regions, and understand how stem
-            cells integrate into epileptic neural circuits.
-        </p>
-
-        <ul>
-            <li>We Develop machine learning <a href="https://github.com/Humancyyborg/cortex_model/tree/main" target="_blank"><b>models</b></a> for automated analysis of stem cell imaging data (morphology, migration, differentiation)</li>
-            <li>We Build predictive models to forecast stem cell behavior based on gene expression, culture conditions, etc.</li>
-            <li>We Integrate imaging, genomic, and clinical data using neural networks to study stem cell-epilepsy interactions</li>
-        </ul>
-
-        <h3>Prototype</h3>
-
-        <div align="center">
-            <p><i>Signals for improved future seizure predictions</i></p>
-            <a href="https://app.uniswap.org/send" target="_blank">
-                <img src="assets/neurademo.gif" alt="Prototype animation" width="100%">
-            </a>
+    <nav>
+        <div class="container">
+            <h3>Aurevia™</h3>
+            <button class="cta-button" style="float: right;">Reserve Now</button>
         </div>
+    </nav>
 
-        <div align="center">
-            <p><i>Automated analysis of stem cell imaging data</i></p>
-            <a href="https://app.uniswap.org/send">
-                <img src="assets/coreImage.jpeg" alt="Prototype animation" width="100%">
-            </a>
-        </div>
+    <div class="neural-visual" style="top: 20%; left: 30%"></div>
+    <div class="neural-visual" style="top: 60%; right: 25%"></div>
 
-        <div align="center">
-            <p><i>Automated analysis of stem cell imaging data</i></p>
-            <a href="https://app.uniswap.org/send">
-                <img src="assets/merlin.png" alt="Prototype animation" width="100%">
-            </a>
+    <section class="hero">
+        <div class="container">
+            <div class="scan-line"></div>
+            <h1 class="gradient-text">Seizure Prediction<br>Redefined</h1>
+            <p style="font-size: 1.4rem; max-width: 600px; opacity: 0.9">
+                Advanced neural analytics detecting epileptic activity 15 minutes before onset
+            </p>
+            <button class="cta-button">Pre-order Now</button>
         </div>
+    </section>
 
-        <div align="center">
-            <p><i>wearable mock up</i></p>
-            <a href="https://app.uniswap.org/send">
-                <img src="assets/cortexModel.jpeg" alt="Prototype animation" width="100%">
-            </a>
-        </div>
-        <div align="center">
-            <p><i>wearable mock up</i></p>
-            <a href="https://app.uniswap.org/send">
-                <img src="assets/cortexEar.jpeg" alt="Prototype animation" width="100%">
-            </a>
-        </div>
-        <div align="center">
-            <p><i>wearable mock up</i></p>
-            <a href="https://app.uniswap.org/send">
-                <img src="assets/cirtex3D.jpeg" alt="Prototype animation" width="100%">
-            </a>
-        </div>
-
-        <h3>Join Coreswap Private-Public Direct Presale </h3>
-
-        <div align="center">
-            <p><i>Coretex DAO Token</i></p>
-            <a href="https://app.uniswap.org/send" target="_blank">
-                <img src="assets/cortex.png" alt="Token presale" width="100%">
-            </a>
-        </div>
-
-        <div class="centered">
-            <h3> ETH Wallet Address: <b>0x08e0Fa852531aee5f8069365003d162EFFc02428</b></h3>
-            <div class="centered">
-            
+    <section>
+        <div class="container">
+            <h2>Neural Frontier Technology</h2>
+            <div class="grid">
+                <div class="feature-card">
+                    <h3>Real-time Monitoring</h3>
+                    <p>Continuous EEG analysis with 256-channel precision</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Predictive Analytics</h3>
+                    <p>Deep learning algorithms detecting pre-ictal patterns</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Smart Alerts</h3>
+                    <p>Multi-platform notifications with 98.7% accuracy</p>
+                </div>
             </div>
-            <a href="https://app.uniswap.org/send " target="_blank" class="button">Buy CortexDAO Token</a>
         </div>
+    </section>
 
-        <p>
-            See current   
-            <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbGqSX6k0PpSD8Ju1PfFElABWZ6OE3gH-8YSCvq_WIznj4MuulP3MaYysw6l11AyiYPuCOsKMBtv8v/pubhtml" target="_blank">Holders</a>
-        </p>
+    <section>
+        <div class="container">
+            <div class="product-showcase">
+                <div class="product-image">
+                    <!-- Your Product Image -->
+                    <img src="assets/aurevia-device.jpg" alt="Aurevia Device">
+                </div>
+                <div>
+                    <h2>Wearable Neuroscience</h2>
+                    <p style="margin-bottom: 2rem;">A seamless fusion of medical technology and modern design</p>
+                    <ul class="specs-list">
+                        <li>▶ 256-channel neural array</li>
+                        <li>▶ 98.7% prediction accuracy</li>
+                        <li>▶ 72-hour continuous monitoring</li>
+                        <li>▶ Military-grade encryption</li>
+                    </ul>
+                    <button class="cta-button" style="margin-top: 3rem;">Reserve Yours</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <h4>About</h4>
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-container">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        When will Aurevia ship to customers?
+                        <span class="arrow">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We're currently finalizing FDA approval and aim to begin shipping Q3 2025. Pre-orders will receive priority delivery.</p>
+                    </div>
+                </div>
 
-        <p><a href="https://x.com/cortexhq_" target="_blank">Cortex</a> is a mission to cure epilepsy.
-        </p>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What is the final cost of the device?
+                        <span class="arrow">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Aurevia system will retail at $2,499. Financing options and insurance coverage assistance will be available.</p>
+                    </div>
+                </div>
 
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is there a subscription fee for the service?
+                        <span class="arrow">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The base monitoring service is included with your purchase. Premium features including advanced analytics and family tracking are available through optional subscriptions.</p>
+                    </div>
+                </div>
 
-        <p>We are currently seeking to hire Engineers and Researchers that share our vision and would like to help
-            build the next generation of tools to help people suffering from epilepsy. We are in the early stages of building,
-            and plan on sharing more information soon! If you are interested in joining, please get in touch at <a href="mailto:dankalu.work@gmail.com">dankalu.work@gmail.com</a> </p>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What's included in the warranty?
+                        <span class="arrow">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All devices come with a 3-year comprehensive warranty covering hardware and software updates. Extended care plans are available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <p>
-            You can follow us on X at
-            <a href="https://x.com/cortexhq_" target="_blank">Cortex</a>
-        </p>
+    <script>
+        // Add FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
 
-     
-    </div>
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                    }
+                });
 
+                // Toggle the clicked FAQ item
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
-
 </html>
