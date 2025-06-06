@@ -3,412 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurevia - Neural Predictive Protection</title>
+    <title>Cortex Lab</title>
     <style>
-        :root {
-            --neon-blue: #00f3ff;
-            --deep-space: #0a0a12;
-            --star-dust: #e0e0e8;
-            --electric-purple: #7d40ff;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, sans-serif;
         }
 
         body {
-            background-color: var(--deep-space);
-            color: var(--star-dust);
-            line-height: 1.8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        .gradient-text {
-            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
         .container {
-            max-width: 1400px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 0;
-            background: rgba(10, 10, 18, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .hero {
-            height: 100vh;
+            padding: 40px 24px;
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            position: relative;
-            border-bottom: 1px solid rgba(224, 224, 232, 0.1);
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .hero h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            max-width: 900px;
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
         }
 
-        .scan-line {
-            position: absolute;
-            height: 100%;
-            width: 2px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                var(--neon-blue) 50%, 
-                transparent 100%);
-            left: 50%;
-            animation: scan 6s infinite;
-        }
-
-        @keyframes scan {
-            0% { top: -100% }
-            100% { top: 100% }
-        }
-
-        section {
-            padding: 8rem 0;
+        .logo {
+            font-size: clamp(36px, 8vw, 48px);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: #1a1a1a;
+            margin-bottom: 16px;
             position: relative;
         }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2:after {
+        .logo::after {
             content: '';
             position: absolute;
-            bottom: -1rem;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--neon-blue), transparent);
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin: 4rem 0;
+        .tagline {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
-        .feature-card {
-            padding: 2rem;
-            border: 1px solid rgba(224, 224, 232, 0.1);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
+        .main-content {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            background: linear-gradient(45deg, rgba(0, 243, 255, 0.05), transparent);
+        .section {
+            margin-bottom: 64px;
         }
 
-        .neural-visual {
-            height: 600px;
-            background: radial-gradient(circle, var(--electric-purple) 0%, transparent 70%);
-            opacity: 0.1;
-            position: absolute;
-            pointer-events: none;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
-            color: var(--deep-space);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-top: 2rem;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
-        }
-
-        .product-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin: 8rem 0;
-        }
-
-        .product-image {
+        .section-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
             position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: linear-gradient(45deg, rgba(0, 243, 255, 0.1), transparent);
-            border: 1px solid rgba(224, 224, 232, 0.1);
-            padding: 2rem;
+            padding-left: 20px;
         }
 
-        .product-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            animation: float 6s ease-in-out infinite;
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: linear-gradient(135deg, #f8f8f8, #e8e8e8);
+            border-radius: 2px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .content-text {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.8;
+            font-weight: 400;
+            margin-bottom: 20px;
         }
 
-        .specs-list {
-            list-style: none;
+        .project-highlight {
+            background: linear-gradient(135deg, #fefefe, #f9f9f9);
+            border: 1px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 32px 28px;
+            margin-top: 32px;
+            position: relative;
+            transition: all 0.4s ease;
         }
 
-        .specs-list li {
-            padding: 1.5rem 0;
-            border-bottom: 1px solid rgba(224, 224, 232, 0.1);
+        .project-highlight:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+            border-color: #e8e8e8;
         }
 
-        .specs-list li:last-child {
-            border-bottom: none;
+        .project-name {
+            font-size: 20px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
 
-        /* FAQ Section Styles */
-        .faq-section {
-            padding: 6rem 0;
-            border-top: 1px solid rgba(224, 224, 232, 0.1);
+        .project-description {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
         }
 
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
+        .subtle-accent {
+            color: #666;
+            font-weight: 500;
         }
 
-        .faq-item {
-            border-bottom: 1px solid rgba(224, 224, 232, 0.1);
-            margin-bottom: 1rem;
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #f5f5f5;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.9s forwards;
         }
 
-        .faq-question {
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            color: var(--star-dust);
-            padding: 1.5rem 0;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
+        .footer-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
         }
 
-        .faq-question:hover {
-            color: var(--neon-blue);
+        .footer-link:hover {
+            color: #555;
         }
 
-        .faq-question .arrow {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            color: #a0a0a8;
-            line-height: 1.6;
-        }
-
-        .faq-answer p {
-            padding-bottom: 1.5rem;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px; /* Adjust based on content height */
-        }
-
-        .faq-item.active .arrow {
-            transform: rotate(90deg);
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 20px;
             }
             
-            .container {
-                padding: 0 1.5rem;
+            .section-title {
+                font-size: 22px;
+                margin-bottom: 20px;
+                padding-left: 16px;
+            }
+            
+            .content-text {
+                font-size: 15px;
+            }
+            
+            .project-highlight {
+                padding: 24px 20px;
+                margin-top: 24px;
+            }
+            
+            .project-name {
+                font-size: 18px;
+            }
+            
+            .project-description {
+                font-size: 14px;
             }
 
-            .product-showcase {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .footer {
+                margin-top: 60px;
+                padding-top: 32px;
+            }
+
+            .footer-link {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 24px 16px;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <h3>Aurevia™</h3>
-            <a href="https://buy.stripe.com/28o7uoewe43T0BacMM" target="_blank" rel="noopener noreferrer" class="cta-button" style="float: right;">Reserve Now</a>
-        </div>
-    </nav>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">Cortex Lab</h1>
+            <p class="tagline">Neural Innovation Research</p>
+        </header>
 
-    <div class="neural-visual" style="top: 20%; left: 30%"></div>
-    <div class="neural-visual" style="top: 60%; right: 25%"></div>
+        <main class="main-content">
+            <section class="section">
+                <!-- <h2 class="section-title">Who We Are</h2> -->
+                <p class="content-text">
+                    We're a small research lab investigating the use of <span class="subtle-accent">neural stem cells</span> to treat epilepsy. We develop AI models of epilepsy to test the delivery of stem cells to the brain.
+                </p>
+                <p class="content-text">
+                    Our goals are to suppress seizures, repair damaged brain regions, and understand how stem cells connect and interact with the brain's existing networks.
+                </p>
+            </section>
 
-    <section class="hero">
-        <div class="container">
-            <div class="scan-line"></div>
-            <h1 class="gradient-text">Seizure Prediction<br>Redefined</h1>
-            <p style="font-size: 1.4rem; max-width: 600px; opacity: 0.9">
-                Advanced neural analytics detecting epileptic activity 15 minutes before onset
-            </p>
-            <a href="https://buy.stripe.com/28o7uoewe43T0BacMM" target="_blank" rel="noopener noreferrer" class="cta-button">Reserve Now</a>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <h2>Neural Frontier Technology</h2>
-            <div class="grid">
-                <div class="feature-card">
-                    <h3>Real-time Monitoring</h3>
-                    <p>Continuous EEG analysis with 256-channel precision</p>
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="project-highlight">
+                    <h3 class="project-name">Aurevia</h3>
+                    <p class="project-description">
+                        While we are research-focused, we are also building Aurevia—a device that monitors brainwave patterns to detect seizures <span class="subtle-accent">15 minutes before they occur</span>—to provide immediate help to people suffering from seizures.
+                    </p>
                 </div>
-                <div class="feature-card">
-                    <h3>Predictive Analytics</h3>
-                    <p>Deep learning algorithms detecting pre-ictal patterns</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Smart Alerts</h3>
-                    <p>Multi-platform notifications with 98.7% accuracy</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="product-showcase">
-                <div class="product-image">
-                    <!-- Your Product Image -->
-                    <img src="assets/aurevia-device.jpg" alt="Aurevia Device">
-                </div>
-                <div>
-                    <h2>Wearable Neuroscience</h2>
-                    <p style="margin-bottom: 2rem;">A seamless fusion of medical technology and modern design</p>
-                    <ul class="specs-list">
-                        <li>▶ 256-channel neural array</li>
-                        <li>▶ 98.7% prediction accuracy</li>
-                        <li>▶ 72-hour continuous monitoring</li>
-                        <li>▶ Military-grade encryption</li>
-                    </ul>
-                    <a href="https://buy.stripe.com/28o7uoewe43T0BacMM" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin-top: 3rem;">Reserve Yours</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="container">
-            <div class="faq-container">
-                <h2>Frequently Asked Questions</h2>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        When will Aurevia ship to customers?
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We aim to begin shipping Q3 2025. Pre-orders will receive priority delivery.</p>
-                    </div>
+                <div class="project-highlight">
+                    <h3 class="project-name">Ada</h3>
+                    <p class="project-description">
+                        A modular computing stack designed to host local open-source models, requiring <span class="subtle-accent">no internet</span>. No internet, no data, no problem. We envision this becoming an agentic brain in the future, but the lab is currently building it to provide advanced open-source models to children in parts of the world without internet access or where connectivity is expensive.
+                    </p>
                 </div>
+            </section>
+        </main>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What is the final cost of the device?
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We don’t have a final cost for the Aurevia system just yet—it’s still in the works. What we can tell you is that it’ll come with financing options and insurance coverage assistance to make it as accessible as possible. We’ll share the exact price as soon as we’ve got it nailed down!</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Is there a subscription fee for the service?
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The base monitoring service is included with your purchase. Premium features including advanced analytics and family tracking are available through optional subscriptions.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What's included in the warranty?
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>All devices come with a 3-year comprehensive warranty covering hardware and software updates. Extended care plans are available.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        I don’t have seizures—can I still reserve one?
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, absolutely—you can reserve it for loved ones or donate to someone in need.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Add FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                const isActive = faqItem.classList.contains('active');
-
-                // Close all other FAQ items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) {
-                        item.classList.remove('active');
-                    }
-                });
-
-                // Toggle the clicked FAQ item
-                faqItem.classList.toggle('active');
-            });
-        });
-    </script>
+        <footer class="footer">
+            <a href="https://x.com/cortexhq_" class="footer-link" target="_blank" rel="noopener noreferrer">Follow us on X</a>
+        </footer>
+    </div>
 </body>
 </html>
