@@ -12,55 +12,184 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
             background-color: #ffffff;
-            color: #2c2c2c;
+            color: #1a1a1a;
             line-height: 1.7;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* DNA Double Helix Animation Background */
+        .dna-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.08;
+        }
+
+        .dna-helix {
+            position: absolute;
+            width: 80px;
+            height: 100vh;
+            animation: floatHelix 12s ease-in-out infinite;
+        }
+
+        .dna-helix:nth-child(1) { left: 15%; animation-delay: 0s; }
+        .dna-helix:nth-child(2) { left: 35%; animation-delay: -4s; }
+        .dna-helix:nth-child(3) { left: 65%; animation-delay: -8s; }
+        .dna-helix:nth-child(4) { right: 15%; animation-delay: -2s; }
+
+        /* Left strand of double helix */
+        .strand-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .strand-left::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(59, 130, 246, 0.6) 0%, 
+                rgba(99, 102, 241, 0.4) 50%, 
+                rgba(59, 130, 246, 0.6) 100%);
+            left: 20px;
+            animation: twist 4s linear infinite;
+            transform-origin: center;
+        }
+
+        /* Right strand of double helix */
+        .strand-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .strand-right::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(99, 102, 241, 0.6) 0%, 
+                rgba(59, 130, 246, 0.4) 50%, 
+                rgba(99, 102, 241, 0.6) 100%);
+            right: 20px;
+            animation: twist 4s linear infinite reverse;
+            transform-origin: center;
+        }
+
+        /* Base pairs connecting the strands */
+        .base-pairs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .base-pair {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                rgba(59, 130, 246, 0.4), 
+                rgba(99, 102, 241, 0.3), 
+                rgba(59, 130, 246, 0.4));
+            left: 20px;
+            border-radius: 1px;
+            animation: basePairRotate 4s linear infinite;
+            transform-origin: center;
+        }
+
+        .base-pair:nth-child(1) { top: 5%; animation-delay: 0s; }
+        .base-pair:nth-child(2) { top: 15%; animation-delay: -0.5s; }
+        .base-pair:nth-child(3) { top: 25%; animation-delay: -1s; }
+        .base-pair:nth-child(4) { top: 35%; animation-delay: -1.5s; }
+        .base-pair:nth-child(5) { top: 45%; animation-delay: -2s; }
+        .base-pair:nth-child(6) { top: 55%; animation-delay: -2.5s; }
+        .base-pair:nth-child(7) { top: 65%; animation-delay: -3s; }
+        .base-pair:nth-child(8) { top: 75%; animation-delay: -3.5s; }
+        .base-pair:nth-child(9) { top: 85%; animation-delay: -4s; }
+        .base-pair:nth-child(10) { top: 95%; animation-delay: -4.5s; }
+
+        @keyframes floatHelix {
+            0%, 100% { transform: translateY(-30px) translateX(0px); }
+            33% { transform: translateY(15px) translateX(10px); }
+            66% { transform: translateY(-15px) translateX(-5px); }
+        }
+
+        @keyframes twist {
+            0% { transform: translateX(0px) scaleY(1); }
+            25% { transform: translateX(15px) scaleY(0.8); }
+            50% { transform: translateX(0px) scaleY(1); }
+            75% { transform: translateX(-15px) scaleY(0.8); }
+            100% { transform: translateX(0px) scaleY(1); }
+        }
+
+        @keyframes basePairRotate {
+            0% { transform: rotate(0deg) scaleX(1); opacity: 0.4; }
+            25% { transform: rotate(45deg) scaleX(0.7); opacity: 0.6; }
+            50% { transform: rotate(90deg) scaleX(0.4); opacity: 0.3; }
+            75% { transform: rotate(135deg) scaleX(0.7); opacity: 0.6; }
+            100% { transform: rotate(180deg) scaleX(1); opacity: 0.4; }
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 50px 32px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            z-index: 2;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 90px;
             opacity: 0;
             animation: fadeInUp 1.2s ease-out 0.3s forwards;
         }
 
         .logo {
-            font-size: clamp(36px, 8vw, 48px);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            color: #1a1a1a;
-            margin-bottom: 16px;
+            font-size: clamp(44px, 9vw, 58px);
+            font-weight: 200;
+            letter-spacing: -0.03em;
+            color: #0f172a;
+            margin-bottom: 20px;
             position: relative;
         }
 
         .logo::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), rgba(99, 102, 241, 0.4), transparent);
+            border-radius: 1px;
         }
 
         .tagline {
             font-size: 16px;
-            color: #666;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            color: #64748b;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .main-content {
@@ -69,17 +198,17 @@
         }
 
         .section {
-            margin-bottom: 64px;
+            margin-bottom: 70px;
         }
 
         .section-title {
-            font-size: 24px;
-            font-weight: 400;
-            color: #1a1a1a;
-            margin-bottom: 24px;
-            letter-spacing: -0.01em;
+            font-size: 26px;
+            font-weight: 300;
+            color: #0f172a;
+            margin-bottom: 28px;
+            letter-spacing: -0.02em;
             position: relative;
-            padding-left: 20px;
+            padding-left: 24px;
         }
 
         .section-title::before {
@@ -89,74 +218,146 @@
             top: 50%;
             transform: translateY(-50%);
             width: 3px;
-            height: 20px;
-            background: linear-gradient(135deg, #f8f8f8, #e8e8e8);
+            height: 24px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(99, 102, 241, 0.6));
             border-radius: 2px;
         }
 
         .content-text {
-            font-size: 16px;
-            color: #444;
+            font-size: 17px;
+            color: #334155;
             line-height: 1.8;
-            font-weight: 400;
-            margin-bottom: 20px;
+            font-weight: 300;
+            margin-bottom: 22px;
         }
 
         .project-highlight {
-            background: linear-gradient(135deg, #fefefe, #f9f9f9);
-            border: 1px solid #f0f0f0;
-            border-radius: 16px;
-            padding: 32px 28px;
-            margin-top: 32px;
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 36px 32px;
+            margin-top: 36px;
             position: relative;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .project-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+            border-radius: 20px 20px 0 0;
         }
 
         .project-highlight:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
-            border-color: #e8e8e8;
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.12);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .project-name {
-            font-size: 20px;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin-bottom: 16px;
+            font-size: 22px;
+            font-weight: 400;
+            color: #0f172a;
+            margin-bottom: 18px;
             letter-spacing: -0.01em;
         }
 
         .project-description {
-            font-size: 15px;
-            color: #555;
-            line-height: 1.7;
+            font-size: 16px;
+            color: #475569;
+            line-height: 1.8;
+            font-weight: 300;
         }
 
         .subtle-accent {
-            color: #666;
+            color: #6366f1;
+            font-weight: 400;
+        }
+
+        .donate-section {
+            text-align: center;
+            margin: 70px 0 50px 0;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 1.2s forwards;
+        }
+
+        .donate-text {
+            font-size: 18px;
+            color: #475569;
+            margin-bottom: 28px;
+            font-weight: 300;
+        }
+
+        .donate-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
             font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donate-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .donate-button:hover::before {
+            left: 100%;
+        }
+
+        .donate-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 16px 35px rgba(59, 130, 246, 0.35);
+        }
+
+        .donate-icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         .footer {
             text-align: center;
             margin-top: 80px;
             padding-top: 40px;
-            border-top: 1px solid #f5f5f5;
+            border-top: 1px solid #e2e8f0;
             opacity: 0;
-            animation: fadeInUp 1.2s ease-out 0.9s forwards;
+            animation: fadeInUp 1.2s ease-out 1.5s forwards;
         }
 
         .footer-link {
-            color: #888;
+            color: #64748b;
             text-decoration: none;
             font-size: 15px;
-            font-weight: 400;
+            font-weight: 300;
             letter-spacing: 0.3px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .footer-link:hover {
-            color: #555;
+            color: #3b82f6;
         }
 
         @keyframes fadeInUp {
@@ -170,32 +371,45 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .container {
-                padding: 32px 20px;
+                padding: 40px 24px;
+            }
+            
+            .header {
+                margin-bottom: 70px;
             }
             
             .section-title {
-                font-size: 22px;
-                margin-bottom: 20px;
-                padding-left: 16px;
+                font-size: 24px;
+                margin-bottom: 24px;
+                padding-left: 20px;
             }
             
             .content-text {
-                font-size: 15px;
+                font-size: 16px;
             }
             
             .project-highlight {
-                padding: 24px 20px;
-                margin-top: 24px;
+                padding: 28px 24px;
+                margin-top: 28px;
             }
             
             .project-name {
-                font-size: 18px;
+                font-size: 20px;
             }
             
             .project-description {
-                font-size: 14px;
+                font-size: 15px;
+            }
+
+            .donate-text {
+                font-size: 16px;
+            }
+
+            .donate-button {
+                padding: 16px 32px;
+                font-size: 15px;
             }
 
             .footer {
@@ -203,19 +417,97 @@
                 padding-top: 32px;
             }
 
-            .footer-link {
-                font-size: 14px;
+            .dna-helix:nth-child(2),
+            .dna-helix:nth-child(4) {
+                display: none;
             }
         }
 
-        @media (max-width: 360px) {
+        @media (max-width: 480px) {
             .container {
-                padding: 24px 16px;
+                padding: 32px 20px;
+            }
+
+            .dna-helix:nth-child(3) {
+                display: none;
+            }
+
+            .donate-button {
+                padding: 14px 28px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- DNA Double Helix Background -->
+    <div class="dna-background">
+        <div class="dna-helix">
+            <div class="strand-left"></div>
+            <div class="strand-right"></div>
+            <div class="base-pairs">
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+            </div>
+        </div>
+        <div class="dna-helix">
+            <div class="strand-left"></div>
+            <div class="strand-right"></div>
+            <div class="base-pairs">
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+            </div>
+        </div>
+        <div class="dna-helix">
+            <div class="strand-left"></div>
+            <div class="strand-right"></div>
+            <div class="base-pairs">
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+            </div>
+        </div>
+        <div class="dna-helix">
+            <div class="strand-left"></div>
+            <div class="strand-right"></div>
+            <div class="base-pairs">
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+                <div class="base-pair"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <header class="header">
             <h1 class="logo">Cortex Lab</h1>
@@ -224,7 +516,6 @@
 
         <main class="main-content">
             <section class="section">
-                <!-- <h2 class="section-title">Who We Are</h2> -->
                 <p class="content-text">
                     We're a small research lab investigating the use of <span class="subtle-accent">neural stem cells</span> to treat epilepsy. We develop AI models of epilepsy to test the delivery of stem cells to the brain.
                 </p>
@@ -241,13 +532,16 @@
                         While we are research-focused, we are also building Aurevia—a device that monitors brainwave patterns to detect seizures <span class="subtle-accent">15 minutes before they occur</span>—to provide immediate help to people suffering from seizures.
                     </p>
                 </div>
-                
-                <div class="project-highlight">
-                    <h3 class="project-name">Ada</h3>
-                    <p class="project-description">
-                        A modular computing stack designed to host local open-source models, requiring <span class="subtle-accent">no internet</span>. No internet, no data, no problem. We envision this becoming an agentic brain in the future, but the lab is currently building it to provide advanced open-source models to children in parts of the world without internet access or where connectivity is expensive.
-                    </p>
-                </div>
+            </section>
+
+            <section class="donate-section">
+                <p class="donate-text">Help advance our neural stem cell research and epilepsy treatments</p>
+                <a href="#donate" class="donate-button">
+                    <svg class="donate-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L15.09 8.26L22 9L15.09 9.74L12 16L8.91 9.74L2 9L8.91 8.26L12 2Z"/>
+                    </svg>
+                    Donate to Our Research
+                </a>
             </section>
         </main>
 
