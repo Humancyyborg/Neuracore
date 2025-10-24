@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cortex Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,136 +13,12 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
+            font-family: 'Space Grotesk', monospace;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
             line-height: 1.7;
             overflow-x: hidden;
             position: relative;
-        }
-
-        /* DNA Double Helix Animation Background */
-        .dna-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.08;
-        }
-
-        .dna-helix {
-            position: absolute;
-            width: 80px;
-            height: 100vh;
-            animation: floatHelix 12s ease-in-out infinite;
-        }
-
-        .dna-helix:nth-child(1) { left: 15%; animation-delay: 0s; }
-        .dna-helix:nth-child(2) { left: 35%; animation-delay: -4s; }
-        .dna-helix:nth-child(3) { left: 65%; animation-delay: -8s; }
-        .dna-helix:nth-child(4) { right: 15%; animation-delay: -2s; }
-
-        /* Left strand of double helix */
-        .strand-left {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .strand-left::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, 
-                rgba(59, 130, 246, 0.6) 0%, 
-                rgba(99, 102, 241, 0.4) 50%, 
-                rgba(59, 130, 246, 0.6) 100%);
-            left: 20px;
-            animation: twist 4s linear infinite;
-            transform-origin: center;
-        }
-
-        /* Right strand of double helix */
-        .strand-right {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .strand-right::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, 
-                rgba(99, 102, 241, 0.6) 0%, 
-                rgba(59, 130, 246, 0.4) 50%, 
-                rgba(99, 102, 241, 0.6) 100%);
-            right: 20px;
-            animation: twist 4s linear infinite reverse;
-            transform-origin: center;
-        }
-
-        /* Base pairs connecting the strands */
-        .base-pairs {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .base-pair {
-            position: absolute;
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                rgba(59, 130, 246, 0.4), 
-                rgba(99, 102, 241, 0.3), 
-                rgba(59, 130, 246, 0.4));
-            left: 20px;
-            border-radius: 1px;
-            animation: basePairRotate 4s linear infinite;
-            transform-origin: center;
-        }
-
-        .base-pair:nth-child(1) { top: 5%; animation-delay: 0s; }
-        .base-pair:nth-child(2) { top: 15%; animation-delay: -0.5s; }
-        .base-pair:nth-child(3) { top: 25%; animation-delay: -1s; }
-        .base-pair:nth-child(4) { top: 35%; animation-delay: -1.5s; }
-        .base-pair:nth-child(5) { top: 45%; animation-delay: -2s; }
-        .base-pair:nth-child(6) { top: 55%; animation-delay: -2.5s; }
-        .base-pair:nth-child(7) { top: 65%; animation-delay: -3s; }
-        .base-pair:nth-child(8) { top: 75%; animation-delay: -3.5s; }
-        .base-pair:nth-child(9) { top: 85%; animation-delay: -4s; }
-        .base-pair:nth-child(10) { top: 95%; animation-delay: -4.5s; }
-
-        @keyframes floatHelix {
-            0%, 100% { transform: translateY(-30px) translateX(0px); }
-            33% { transform: translateY(15px) translateX(10px); }
-            66% { transform: translateY(-15px) translateX(-5px); }
-        }
-
-        @keyframes twist {
-            0% { transform: translateX(0px) scaleY(1); }
-            25% { transform: translateX(15px) scaleY(0.8); }
-            50% { transform: translateX(0px) scaleY(1); }
-            75% { transform: translateX(-15px) scaleY(0.8); }
-            100% { transform: translateX(0px) scaleY(1); }
-        }
-
-        @keyframes basePairRotate {
-            0% { transform: rotate(0deg) scaleX(1); opacity: 0.4; }
-            25% { transform: rotate(45deg) scaleX(0.7); opacity: 0.6; }
-            50% { transform: rotate(90deg) scaleX(0.4); opacity: 0.3; }
-            75% { transform: rotate(135deg) scaleX(0.7); opacity: 0.6; }
-            100% { transform: rotate(180deg) scaleX(1); opacity: 0.4; }
         }
 
         .container {
@@ -164,12 +41,13 @@
         }
 
         .logo {
-            font-size: clamp(44px, 9vw, 58px);
-            font-weight: 200;
-            letter-spacing: -0.03em;
-            color: #0f172a;
+            font-size: clamp(44px, 9vw, 62px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #00ff88;
             margin-bottom: 20px;
             position: relative;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
         }
 
         .logo::after {
@@ -178,17 +56,18 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 100px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), rgba(99, 102, 241, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
             border-radius: 1px;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
         .tagline {
-            font-size: 16px;
-            color: #64748b;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-size: 14px;
+            color: #888;
+            font-weight: 400;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
@@ -202,44 +81,44 @@
         }
 
         .section-title {
-            font-size: 26px;
-            font-weight: 300;
-            color: #0f172a;
+            font-size: 28px;
+            font-weight: 500;
+            color: #00ff88;
             margin-bottom: 28px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             position: relative;
             padding-left: 24px;
         }
 
         .section-title::before {
-            content: '';
+            content: '▸';
             position: absolute;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 3px;
-            height: 24px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(99, 102, 241, 0.6));
-            border-radius: 2px;
+            color: #00ff88;
+            font-size: 20px;
         }
 
         .content-text {
             font-size: 17px;
-            color: #334155;
+            color: #b0b0b0;
             line-height: 1.8;
             font-weight: 300;
             margin-bottom: 22px;
         }
 
         .project-highlight {
-            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
+            border: 1px solid #222;
+            border-radius: 12px;
             padding: 36px 32px;
-            margin-top: 36px;
+            margin-bottom: 20px;
             position: relative;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            text-decoration: none;
+            display: block;
+            overflow: hidden;
         }
 
         .project-highlight::before {
@@ -248,34 +127,40 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
-            border-radius: 20px 20px 0 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            border-radius: 12px 12px 0 0;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .project-highlight:hover::before {
+            opacity: 1;
         }
 
         .project-highlight:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.12);
-            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-6px);
+            border-color: #00ff88;
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.2);
         }
 
         .project-name {
-            font-size: 22px;
-            font-weight: 400;
-            color: #0f172a;
+            font-size: 24px;
+            font-weight: 500;
+            color: #00ff88;
             margin-bottom: 18px;
             letter-spacing: -0.01em;
         }
 
         .project-description {
             font-size: 16px;
-            color: #475569;
+            color: #999;
             line-height: 1.8;
             font-weight: 300;
         }
 
         .subtle-accent {
-            color: #6366f1;
+            color: #00ff88;
             font-weight: 400;
         }
 
@@ -288,51 +173,61 @@
 
         .donate-text {
             font-size: 18px;
-            color: #475569;
+            color: #999;
             margin-bottom: 28px;
             font-weight: 300;
         }
 
-        .donate-button {
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .donate-button, .cor-button {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-            color: white;
+            color: #0a0a0a;
             text-decoration: none;
             padding: 18px 40px;
-            border-radius: 50px;
+            border-radius: 8px;
             font-weight: 500;
             font-size: 16px;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
         }
 
-        .donate-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
+        .donate-button {
+            background: #00ff88;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
         }
 
-        .donate-button:hover::before {
-            left: 100%;
+        .cor-button {
+            background: transparent;
+            border: 2px solid #00ff88;
+            color: #00ff88;
         }
 
         .donate-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 16px 35px rgba(59, 130, 246, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
         }
 
-        .donate-icon {
+        .cor-button:hover {
+            background: #00ff88;
+            color: #0a0a0a;
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        }
+
+        .donate-icon, .cor-icon {
             width: 18px;
             height: 18px;
             fill: currentColor;
@@ -342,22 +237,23 @@
             text-align: center;
             margin-top: 80px;
             padding-top: 40px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #222;
             opacity: 0;
             animation: fadeInUp 1.2s ease-out 1.5s forwards;
         }
 
         .footer-link {
-            color: #64748b;
+            color: #666;
             text-decoration: none;
             font-size: 15px;
             font-weight: 300;
-            letter-spacing: 0.3px;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
+            text-transform: uppercase;
         }
 
         .footer-link:hover {
-            color: #3b82f6;
+            color: #00ff88;
         }
 
         @keyframes fadeInUp {
@@ -392,7 +288,7 @@
             
             .project-highlight {
                 padding: 28px 24px;
-                margin-top: 28px;
+                margin-bottom: 16px;
             }
             
             .project-name {
@@ -407,19 +303,21 @@
                 font-size: 16px;
             }
 
-            .donate-button {
+            .button-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .donate-button, .cor-button {
                 padding: 16px 32px;
                 font-size: 15px;
+                width: 100%;
+                max-width: 280px;
             }
 
             .footer {
                 margin-top: 60px;
                 padding-top: 32px;
-            }
-
-            .dna-helix:nth-child(2),
-            .dna-helix:nth-child(4) {
-                display: none;
             }
         }
 
@@ -428,11 +326,7 @@
                 padding: 32px 20px;
             }
 
-            .dna-helix:nth-child(3) {
-                display: none;
-            }
-
-            .donate-button {
+            .donate-button, .cor-button {
                 padding: 14px 28px;
                 font-size: 14px;
             }
@@ -440,77 +334,9 @@
     </style>
 </head>
 <body>
-    <!-- DNA Double Helix Background -->
-    <div class="dna-background">
-        <div class="dna-helix">
-            <div class="strand-left"></div>
-            <div class="strand-right"></div>
-            <div class="base-pairs">
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-            </div>
-        </div>
-        <div class="dna-helix">
-            <div class="strand-left"></div>
-            <div class="strand-right"></div>
-            <div class="base-pairs">
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-            </div>
-        </div>
-        <div class="dna-helix">
-            <div class="strand-left"></div>
-            <div class="strand-right"></div>
-            <div class="base-pairs">
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-            </div>
-        </div>
-        <div class="dna-helix">
-            <div class="strand-left"></div>
-            <div class="strand-right"></div>
-            <div class="base-pairs">
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-                <div class="base-pair"></div>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <header class="header">
-            <h1 class="logo">Cortex Lab</h1>
+            <h1 class="logo">CORTEX LAB</h1>
             <p class="tagline">Neural Innovation Research</p>
         </header>
 
@@ -526,22 +352,36 @@
 
             <section class="section">
                 <h2 class="section-title">Projects</h2>
-                <div class="project-highlight">
+                <a href="https://github.com/Humancyyborg/CORTEX-LABs" class="project-highlight" target="_blank" rel="noopener noreferrer">
                     <h3 class="project-name">Aurevia</h3>
                     <p class="project-description">
-                        While we are research-focused, we are also building Aurevia—a device that monitors brainwave patterns to detect seizures <span class="subtle-accent">15 minutes before they occur</span>—to provide immediate help to people suffering from seizures.
+                        A device that monitors brainwave patterns to detect seizures <span class="subtle-accent">15 minutes before they occur</span>—providing immediate help to people suffering from seizures.
                     </p>
-                </div>
+                </a>
+                <a href="https://research.cortex.it.com" class="project-highlight" target="_blank" rel="noopener noreferrer">
+                    <h3 class="project-name">Research</h3>
+                    <p class="project-description">
+                        Explore our ongoing research in neural stem cell therapy, AI models of epilepsy, and innovative approaches to treating neurological conditions.
+                    </p>
+                </a>
             </section>
 
             <section class="donate-section">
                 <p class="donate-text">Help advance our neural stem cell research and epilepsy treatments</p>
-                <a href="https://app.hel.io/pay/68d5c2fd41caed74ecb0c3dd" class="donate-button" target="_blank" rel="noopener noreferrer">
-                    <svg class="donate-icon" viewBox="0 0 24 24">
-                        <path d="M12 2L15.09 8.26L22 9L15.09 9.74L12 16L8.91 9.74L2 9L8.91 8.26L12 2Z"/>
-                    </svg>
-                    Donate to Our Research
-                </a>
+                <div class="button-group">
+                    <a href="https://app.hel.io/pay/68d5c2fd41caed74ecb0c3dd" class="donate-button" target="_blank" rel="noopener noreferrer">
+                        <svg class="donate-icon" viewBox="0 0 24 24">
+                            <path d="M12 2L15.09 8.26L22 9L15.09 9.74L12 16L8.91 9.74L2 9L8.91 8.26L12 2Z"/>
+                        </svg>
+                        Donate
+                    </a>
+                    <a href="https://crowdsale.cortex.it.com" class="cor-button" target="_blank" rel="noopener noreferrer">
+                        <svg class="cor-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/>
+                        </svg>
+                        Buy $COR
+                    </a>
+                </div>
             </section>
             
         </main>
