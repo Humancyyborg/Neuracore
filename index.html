@@ -1,394 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cortex Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cortex Lab — Research Dossier</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
 
-        body {
-            font-family: 'Space Grotesk', monospace;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-        }
+  :root{
+    --bg:      #faf9f6;
+    --panel:   #ffffff;
+    --ink:     #141414;
+    --mute:    #6b6b64;
+    --line:    #ddd9d0;
+    --teal:    #2f6f66;
+    --teal-bg: #e2eeec;
+  }
 
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 50px 32px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-        }
+  *{ margin:0; padding:0; box-sizing:border-box; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 90px;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease-out 0.3s forwards;
-        }
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:34px 34px;
+    background-position:-1px -1px;
+  }
 
-        .logo {
-            font-size: clamp(44px, 9vw, 62px);
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: #00ff88;
-            margin-bottom: 20px;
-            position: relative;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-        }
+  .frame{
+    max-width:1040px;
+    margin:0 auto;
+    background:var(--bg);
+    min-height:100vh;
+    border-left:1px solid var(--line);
+    border-right:1px solid var(--line);
+  }
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff88, transparent);
-            border-radius: 1px;
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-        }
+  .masthead{
+    padding:2.6rem 2.4rem 2rem;
+    border-bottom:1px solid var(--line);
+  }
 
-        .tagline {
-            font-size: 14px;
-            color: #888;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+  .masthead .eyebrow{
+    display:flex;
+    justify-content:space-between;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mute);
+    margin-bottom:1.4rem;
+  }
 
-        .main-content {
-            opacity: 0;
-            animation: fadeInUp 1.2s ease-out 0.6s forwards;
-        }
+  .masthead .eyebrow .status{ color:var(--teal); }
 
-        .section {
-            margin-bottom: 70px;
-        }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:2.6rem;
+    letter-spacing:-0.01em;
+  }
 
-        .section-title {
-            font-size: 28px;
-            font-weight: 500;
-            color: #00ff88;
-            margin-bottom: 28px;
-            letter-spacing: -0.01em;
-            position: relative;
-            padding-left: 24px;
-        }
+  .masthead p{
+    color:var(--mute);
+    font-size:1rem;
+    max-width:520px;
+    margin-top:0.6rem;
+    line-height:1.5;
+  }
 
-        .section-title::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #00ff88;
-            font-size: 20px;
-        }
+  .brief{
+    padding:2rem 2.4rem;
+    border-bottom:1px solid var(--line);
+  }
 
-        .content-text {
-            font-size: 17px;
-            color: #b0b0b0;
-            line-height: 1.8;
-            font-weight: 300;
-            margin-bottom: 22px;
-        }
+  .brief-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:0.8rem;
+  }
 
-        .project-highlight {
-            background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 36px 32px;
-            margin-bottom: 20px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            display: block;
-            overflow: hidden;
-        }
+  .brief p{
+    font-size:0.98rem;
+    color:#3a3a35;
+    line-height:1.7;
+    max-width:640px;
+    margin-bottom:0.9rem;
+  }
 
-        .project-highlight::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff88, transparent);
-            border-radius: 12px 12px 0 0;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
+  .brief p:last-child{ margin-bottom:0; }
 
-        .project-highlight:hover::before {
-            opacity: 1;
-        }
+  .brief .accent{ color:var(--teal); font-weight:500; }
 
-        .project-highlight:hover {
-            transform: translateY(-6px);
-            border-color: #00ff88;
-            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.2);
-        }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
 
-        .project-name {
-            font-size: 24px;
-            font-weight: 500;
-            color: #00ff88;
-            margin-bottom: 18px;
-            letter-spacing: -0.01em;
-        }
+  .card{
+    position:relative;
+    padding:2.2rem 2.2rem 2rem;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .card:nth-child(2n){ border-right:none; }
 
-        .project-description {
-            font-size: 16px;
-            color: #999;
-            line-height: 1.8;
-            font-weight: 300;
-        }
+  .card::before, .card::after{
+    content:'';
+    position:absolute;
+    width:9px; height:9px;
+    border-top:1px solid var(--mute);
+    border-left:1px solid var(--mute);
+    top:14px; left:14px;
+  }
+  .card::after{
+    top:auto; left:auto;
+    bottom:14px; right:14px;
+    border-top:none; border-left:none;
+    border-bottom:1px solid var(--mute);
+    border-right:1px solid var(--mute);
+  }
 
-        .subtle-accent {
-            color: #00ff88;
-            font-weight: 400;
-        }
+  .card-id{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--teal);
+    margin-bottom:0.5rem;
+  }
 
-        .donate-section {
-            text-align: center;
-            margin: 70px 0 50px 0;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease-out 1.2s forwards;
-        }
+  .card h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1.25rem;
+    margin-bottom:0.55rem;
+  }
 
-        .donate-text {
-            font-size: 18px;
-            color: #999;
-            margin-bottom: 28px;
-            font-weight: 300;
-        }
+  .card p.desc{
+    font-size:0.88rem;
+    color:var(--mute);
+    line-height:1.55;
+    margin-bottom:1.1rem;
+    max-width:320px;
+  }
 
-        .button-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+  .readout{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:14px 16px;
+    margin-bottom:1.1rem;
+  }
 
-        .donate-button, .cor-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: #0a0a0a;
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-        }
+  .readout-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.58rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+    padding-bottom:9px;
+    margin-bottom:9px;
+    border-bottom:1px dashed var(--line);
+  }
 
-        .donate-button {
-            background: #00ff88;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-        }
+  .spec-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px 14px;
+  }
 
-        .cor-button {
-            background: transparent;
-            border: 2px solid #00ff88;
-            color: #00ff88;
-        }
+  .spec-row{ display:flex; flex-direction:column; gap:2px; }
 
-        .donate-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
-        }
+  .spec-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.56rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--mute);
+  }
 
-        .cor-button:hover {
-            background: #00ff88;
-            color: #0a0a0a;
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
-        }
+  .spec-value{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    color:var(--ink);
+  }
 
-        .donate-icon, .cor-icon {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
+  .tag-row{
+    display:flex;
+    gap:8px;
+    margin-bottom:1.2rem;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
 
-        .footer {
-            text-align: center;
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid #222;
-            opacity: 0;
-            animation: fadeInUp 1.2s ease-out 1.5s forwards;
-        }
+  .tag{
+    padding:3px 8px;
+    background:var(--teal-bg);
+    color:var(--teal);
+    border:1px solid #bdd8d2;
+  }
 
-        .footer-link {
-            color: #666;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
+  .card-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.04em;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:1px;
+  }
+  .card-link:hover{ color:var(--teal); border-color:var(--teal); }
 
-        .footer-link:hover {
-            color: #00ff88;
-        }
+  .support{
+    text-align:center;
+    padding:3rem 2.4rem;
+    border-bottom:1px solid var(--line);
+  }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .support p{
+    color:var(--mute);
+    font-size:0.95rem;
+    margin-bottom:1.4rem;
+  }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 24px;
-            }
-            
-            .header {
-                margin-bottom: 70px;
-            }
-            
-            .section-title {
-                font-size: 24px;
-                margin-bottom: 24px;
-                padding-left: 20px;
-            }
-            
-            .content-text {
-                font-size: 16px;
-            }
-            
-            .project-highlight {
-                padding: 28px 24px;
-                margin-bottom: 16px;
-            }
-            
-            .project-name {
-                font-size: 20px;
-            }
-            
-            .project-description {
-                font-size: 15px;
-            }
+  .donate-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--teal);
+    color:#fff;
+    text-decoration:none;
+    padding:0.85rem 2.2rem;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border:1px solid var(--teal);
+    transition:background 0.25s, color 0.25s;
+  }
+  .donate-btn:hover{ background:transparent; color:var(--teal); }
 
-            .donate-text {
-                font-size: 16px;
-            }
+  footer{
+    padding:1.4rem 2.4rem;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.08em;
+    color:var(--mute);
+    display:flex;
+    justify-content:space-between;
+    text-transform:uppercase;
+  }
 
-            .button-group {
-                flex-direction: column;
-                gap: 12px;
-            }
+  footer a{ color:var(--mute); text-decoration:none; }
+  footer a:hover{ color:var(--teal); }
 
-            .donate-button, .cor-button {
-                padding: 16px 32px;
-                font-size: 15px;
-                width: 100%;
-                max-width: 280px;
-            }
-
-            .footer {
-                margin-top: 60px;
-                padding-top: 32px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 32px 20px;
-            }
-
-            .donate-button, .cor-button {
-                padding: 14px 28px;
-                font-size: 14px;
-            }
-        }
-    </style>
+  @media (max-width:720px){
+    .grid{ grid-template-columns:1fr; }
+    .card{ border-right:none; }
+    .masthead{ padding:2rem 1.4rem 1.6rem; }
+    .brief{ padding:1.6rem 1.4rem; }
+    .card{ padding:1.8rem 1.4rem; }
+    h1{ font-size:2.1rem; }
+    footer{ flex-direction:column; gap:6px; text-align:center; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1 class="logo">CORTEX LAB</h1>
-            <p class="tagline">Neural Innovation Research</p>
-        </header>
 
-        <main class="main-content">
-            <section class="section">
-                <p class="content-text">
-                    We're a small research lab investigating the use of <span class="subtle-accent">neural stem cells</span> to treat epilepsy. We develop AI models of epilepsy to test the delivery of stem cells to the brain.
-                </p>
-                <p class="content-text">
-                    Our goals are to suppress seizures, repair damaged brain regions, and understand how stem cells connect and interact with the brain's existing networks.
-                </p>
-            </section>
+<div class="frame">
 
-            <section class="section">
-                <h2 class="section-title">Projects</h2>
-                <a href="https://github.com/Humancyyborg/CORTEX-LABs" class="project-highlight" target="_blank" rel="noopener noreferrer">
-                    <h3 class="project-name">Aurevia</h3>
-                    <p class="project-description">
-                        A device that monitors brainwave patterns to detect seizures <span class="subtle-accent">15 minutes before they occur</span>—providing immediate help to people suffering from seizures.
-                    </p>
-                </a>
-                <a href="https://research.cortex.it.com" class="project-highlight" target="_blank" rel="noopener noreferrer">
-                    <h3 class="project-name">Research</h3>
-                    <p class="project-description">
-                        Explore our ongoing research in neural stem cell therapy, AI models of epilepsy, and innovative approaches to treating neurological conditions.
-                    </p>
-                </a>
-            </section>
-
-            <section class="donate-section">
-                <p class="donate-text">Help advance our neural stem cell research and epilepsy treatments</p>
-                <div class="button-group">
-                    <a href="https://app.hel.io/pay/68d5c2fd41caed74ecb0c3dd" class="donate-button" target="_blank" rel="noopener noreferrer">
-                        <svg class="donate-icon" viewBox="0 0 24 24">
-                            <path d="M12 2L15.09 8.26L22 9L15.09 9.74L12 16L8.91 9.74L2 9L8.91 8.26L12 2Z"/>
-                        </svg>
-                        Donate
-                    </a>
-                    <a href="https://crowdsale.cortex.it.com" class="cor-button" target="_blank" rel="noopener noreferrer">
-                        <svg class="cor-icon" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/>
-                        </svg>
-                        Buy $COR
-                    </a>
-                </div>
-            </section>
-            
-        </main>
-
-        <footer class="footer">
-            <a href="https://x.com/cortexhq_" class="footer-link" target="_blank" rel="noopener noreferrer">Follow us on X</a>
-        </footer>
+  <div class="masthead">
+    <div class="eyebrow">
+      <span>Cortex Lab / Research Dossier</span>
+      <span class="status">Status: Active R&amp;D</span>
     </div>
+    <h1>Cortex Lab</h1>
+    <p>Neural innovation research. A small lab investigating neural stem cell therapy and AI-modeled epilepsy treatment.</p>
+  </div>
+
+  <div class="brief">
+    <div class="brief-label">Research Brief</div>
+    <p>We're a small research lab investigating the use of <span class="accent">neural stem cells</span> to treat epilepsy. We build AI models of epilepsy to test the delivery of stem cells to the brain.</p>
+    <p>Our goals: suppress seizures, repair damaged brain regions, and understand how stem cells connect and interact with the brain's existing networks.</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-id">PROJECT 01 · DEVICE</div>
+      <h2>Aurevia</h2>
+      <p class="desc">Monitors brainwave patterns to detect seizures 15 minutes before they occur — providing early warning to people living with epilepsy.</p>
+      <div class="readout">
+        <div class="readout-header">Spec on file</div>
+        <div class="spec-grid">
+          <div class="spec-row"><span class="spec-label">Modality</span><span class="spec-value">EEG wearable</span></div>
+          <div class="spec-row"><span class="spec-label">Lead time</span><span class="spec-value">15 min pre-onset</span></div>
+          <div class="spec-row"><span class="spec-label">Output</span><span class="spec-value">Real-time alert</span></div>
+          <div class="spec-row"><span class="spec-label">Form factor</span><span class="spec-value">Wearable</span></div>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Prototype</span>
+        <span class="tag">Neural Sensing</span>
+      </div>
+      <a href="https://github.com/Humancyyborg/CORTEX-LABs" class="card-link" target="_blank" rel="noopener noreferrer">View repository →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-id">PROJECT 02 · RESEARCH</div>
+      <h2>Research</h2>
+      <p class="desc">Ongoing research in neural stem cell therapy, AI models of epilepsy, and approaches to treating neurological conditions.</p>
+      <div class="readout">
+        <div class="readout-header">Spec on file</div>
+        <div class="spec-grid">
+          <div class="spec-row"><span class="spec-label">Focus</span><span class="spec-value">Stem cell therapy</span></div>
+          <div class="spec-row"><span class="spec-label">Model</span><span class="spec-value">AI epilepsy sim</span></div>
+          <div class="spec-row"><span class="spec-label">Stage</span><span class="spec-value">Ongoing study</span></div>
+          <div class="spec-row"><span class="spec-label">Access</span><span class="spec-value">Public portal</span></div>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Ongoing</span>
+        <span class="tag">Published</span>
+      </div>
+      <a href="https://research.cortex.it.com" class="card-link" target="_blank" rel="noopener noreferrer">Read findings →</a>
+    </div>
+
+  </div>
+
+  <div class="support">
+    <p>Help advance our neural stem cell research and epilepsy treatments.</p>
+    <a href="https://app.hel.io/pay/68d5c2fd41caed74ecb0c3dd" class="donate-btn" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9L15.09 9.74L12 16L8.91 9.74L2 9L8.91 8.26L12 2Z"/></svg>
+      Donate
+    </a>
+  </div>
+
+  <footer>
+    <span>Cortex Lab</span>
+    <a href="https://x.com/cortexhq_" target="_blank" rel="noopener noreferrer">Follow on X</a>
+  </footer>
+
+</div>
+
 </body>
 </html>
